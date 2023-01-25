@@ -29,7 +29,7 @@ import org.gradle.api.provider.ProviderFactory
 
 import javax.inject.Inject
 
-@CompileStatic
+//@CompileStatic
 class PatchExtension {
 
     File root
@@ -51,7 +51,7 @@ class PatchExtension {
         this.addAsSafeDirectory = objects.property(Boolean.class)
             .convention(
                 providers.environmentVariable("GITPATCHER_ADD_GIT_SAFEDIR")
-                    .map { it.equals("true") }
+                    .map { it == "true" }
                     .orElse(false)
             )
         this.committerNameOverride = objects.property(String).convention("GitPatcher")

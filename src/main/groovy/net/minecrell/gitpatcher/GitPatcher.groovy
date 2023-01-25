@@ -22,7 +22,6 @@
 
 package net.minecrell.gitpatcher
 
-import groovy.transform.CompileStatic
 import net.minecrell.gitpatcher.task.FindGitTask
 import net.minecrell.gitpatcher.task.UpdateSubmodulesTask
 import net.minecrell.gitpatcher.task.patch.ApplyPatchesTask
@@ -33,14 +32,10 @@ import org.gradle.api.Project
 
 class GitPatcher implements Plugin<Project> {
 
-    protected Project project
-    protected PatchExtension extension
-
     @Override
     void apply(Project project) {
-        this.project = project
         project.with {
-            this.extension = extensions.create('patches', PatchExtension)
+            def extension = extensions.create('patches', PatchExtension)
             extension.root = projectDir
 
             def findGit = tasks.register('findGit', FindGitTask)
@@ -76,15 +71,4 @@ class GitPatcher implements Plugin<Project> {
             }
         }
     }
-
-    @CompileStatic
-    Project getProject() {
-        return project
-    }
-
-    @CompileStatic
-    PatchExtension getExtension() {
-        return extension
-    }
-
 }

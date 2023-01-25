@@ -56,7 +56,6 @@ abstract class MakePatchesTask extends PatchTask {
         return super.getPatches()
     }
 
-
     {
         outputs.upToDateWhen {
             if (!repo.directory) {

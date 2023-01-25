@@ -40,7 +40,7 @@ abstract class FindGitTask extends DefaultTask {
             logger.lifecycle("Using $version for patching submodule $submodule.")
         } catch (Throwable e) {
             throw new UnsupportedOperationException(
-                    'Failed to verify Git version. Make sure running the Gradle build in an environment where Git is in your PATH.', e);
+                    'Failed to verify Git version. Make sure running the Gradle build in an environment where Git is in your PATH.', e)
         }
     }
 

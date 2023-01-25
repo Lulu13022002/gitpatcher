@@ -28,6 +28,7 @@ import net.minecrell.gitpatcher.Git
 import net.minecrell.gitpatcher.task.SubmoduleTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Console
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 
 abstract class PatchTask extends SubmoduleTask {
@@ -37,17 +38,19 @@ abstract class PatchTask extends SubmoduleTask {
     @Internal
     File root
 
+    @Internal
     File patchDir
 
     @Console
-    public abstract Property<Boolean> getAddAsSafeDirectory()
+    abstract Property<Boolean> getAddAsSafeDirectory()
 
     @Console
-    public abstract Property<String> getCommitterName()
+    abstract Property<String> getCommitterName()
 
     @Console
-    public abstract Property<String> getCommitterEmail()
+    abstract Property<String> getCommitterEmail()
 
+    @InputFiles
     protected File[] getPatches() {
         if (!patchDir.directory) {
             return new File[0]
@@ -66,6 +69,7 @@ abstract class PatchTask extends SubmoduleTask {
         return new File(repo, '.git')
     }
 
+    @Internal
     File getRefCache() {
         return new File(gitDir, '.gitpatcher_ref')
     }
