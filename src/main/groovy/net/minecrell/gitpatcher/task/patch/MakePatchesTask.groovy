@@ -22,6 +22,8 @@
 
 package net.minecrell.gitpatcher.task.patch
 
+import org.gradle.api.tasks.Input
+
 import static java.lang.System.out
 
 import net.minecrell.gitpatcher.Git
@@ -35,6 +37,9 @@ import org.gradle.api.tasks.UntrackedTask
 abstract class MakePatchesTask extends PatchTask {
 
     private static final Closure HUNK = { it.startsWith('@@') }
+
+    @Input
+    String[] formatPatchArgs
 
     @Override @InputDirectory
     File getRepo() {
@@ -81,7 +86,7 @@ abstract class MakePatchesTask extends PatchTask {
         def git = new Git(repo)
         def safeState = setupGit(git)
         try {
-            git.format_patch('--no-stat', '--zero-commit', '--full-index', '--no-signature', '-N', '-o', patchDir.absolutePath, 'origin/upstream') >> null
+            git.format_patch(*formatPatchArgs, '-o', patchDir.absolutePath, 'origin/upstream') >> null
 
             git.repo = root
             git.add('-A', patchDir.absolutePath) >> out

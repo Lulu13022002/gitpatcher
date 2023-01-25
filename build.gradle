@@ -2,9 +2,6 @@ plugins {
     id 'java-gradle-plugin'
     id 'groovy'
 
-    id 'eclipse'
-    id 'idea'
-
     id 'maven-publish'
     id 'com.gradle.plugin-publish' version '0.15.0'
 
@@ -15,9 +12,6 @@ plugins {
 group = 'net.minecraftforge' // Publishing under our name as we are a fork
 version = gradleutils.getTagOffsetBranchVersion(null, 'master', 'HEAD')
 description = 'A Gradle plugin to manage patches for Git repositories'
-
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
 
 repositories {
     mavenCentral()
@@ -34,6 +28,7 @@ license {
 }
 
 java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
     withSourcesJar()
     withJavadocJar()
 }

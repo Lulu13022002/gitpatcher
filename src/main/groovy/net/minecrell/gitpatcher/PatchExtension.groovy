@@ -40,6 +40,13 @@ class PatchExtension {
 
     File patches
 
+    /**
+     * Additional arguments to pass to the Git when formatting patch files,
+     * allowing for the patches produced by gitpatcher to be controlled more
+     * directly - defaults to {@code ['--no-stat', '--zero-commit', '--full-index', '--no-signature', '-N']}.
+     */
+    String[] formatPatchArgs = ['--no-stat', '--zero-commit', '--full-index', '--no-signature', '-N']
+
     final Property<Boolean> addAsSafeDirectory
 
     final Property<String> committerNameOverride
